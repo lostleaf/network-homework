@@ -1,0 +1,11 @@
+task :default => "gbn"
+
+desc "compile go back n"
+task :gbn do
+    sh "/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 gbn.c -o gbn"
+end
+
+desc "compile prog2"
+task :prog2 do |t|
+    sh "/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2 prog2.c -o prog2"
+end

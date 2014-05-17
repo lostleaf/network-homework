@@ -1,0 +1,105 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} 
+\usepackage{graphicx,psfrag} 
+\usepackage{fancyhdr}
+\usepackage{color} 
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{leftidx} 
+\usepackage{mathrsfs} 
+\usepackage{xeCJK}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bfseries,       % keyword style
+  language=Ruby,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\setCJKmainfont[BoldFont=兰亭黑-简,ItalicFont=STKaiti]{STSong}
+\geometry{left=3.17cm,right=3.17cm,top=2.54cm,bottom=2.54cm}
+
+\begin{document}
+
+\pagestyle{fancy}
+\rfoot{\thepage}
+\rhead{\bfseries 计算机网络}
+\setlength{\parskip}{0.7ex plus0.2ex minus0.2ex}
+\cfoot{\empty}
+\lhead{\empty}
+
+
+\title{Go-Back-N实验报告}
+\author{李青林，5110307074}
+\date{}
+\maketitle
+
+\headheight 3pt
+\thispagestyle{fancy}
+\section{实验概况}
+本实验通过C语言编写的模拟器,在模拟环境下实现了Go-Back-N协议.本实验利用在网络层上的的不可靠传输协议实现了单向的顺序递交的可靠传输协议.
+\section{实验内容}
+\subsection{发送端A}
+根据实验要求,设定窗口长度$N$为8,超时时间为10个时间单位
+\subsubsection{初始化}
+\begin{itemize}
+\item 设定$base=1$, $nextseqnum=1$
+\item 清空buffer
+\end{itemize}
+\subsubsection{响应事件}
+\begin{enumerate}
+\item \textbf{layer5传递一条message}:\\
+首先利用message内容和sequence number计算checksum,并制作packet.\\
+将packet缓存到buffer中.\\
+若$nextseqnum = base$,将启动计时器.\\
+将buffer中sequence number小于$base + N$的packet全部发出到layer3,令$nextseqnum = (seqnum of last packet) + 1$.
+\item \textbf{layer3接收到一个packet}:\\
+首先计算该packet的checksum,确认该packet是否无损.\\
+若packet已损坏，则不做任何事情(丢弃该packet).\\
+若packet无损，将base移动至$acknum + 1$，并根据是否有ACK还没有接收到确定停止还是重启计时器.
+\item \textbf{计时器超时}:\\
+重发$base$到$nextseqnum$范围内的所有packet并重启计时器.
+\end{enumerate}
+\subsection{接收端B}
+\subsubsection{初始化}
+设定$expectedseqnum=1$, 制作$acknum = 0$的sndpkt.
+\subsubsection{响应事件}
+\begin{enumerate}
+    \item 
+\textbf{layer3接收到packet}:\\
+如果该packet无损坏且$seqnum = expectedseqnum$,则将该packet包含的message交付给layer5,
+并令sndpkt的$acknum=seqnum$, $expectedseqnum++$.利用layer3发送sndpkt\\
+否则只需重发sndpkt(主要是为了应对ACK丢包).\\
+\end{enumerate}
+\section{实验总结}
+通过这次实验,我理解了Go-Back-N协议的基本原理,利用模拟环境实现了Go-Back-N协议,掌握了传输层协议的基本思想.
+\end{document}
