@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsthm}
+\usepackage{amsmath,amssymb,CJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{enumerate}
+
+\openup 7pt\pagestyle{plain} \topmargin -40pt \textwidth
+14.5cm\textheight 21.5cm
+\parskip .09 truein
+\baselineskip 4pt\lineskip 4pt \setcounter{page}{1}
+\def\a{\alpha}\def\b{\beta}\def\d{\mathrm{d}}\def\D{\Delta}\def\fs{\footnotesize}
+\def\g{\gamma}
+\def\G{\Gamma}\def\l{\lambda}\def\L{\Lambda}\def\o{\omiga}\def\p{\psi}
+\def\se{\subseteq}\def\seq{\subseteq}\def\Si{\Sigma}\def\si{\sigma}\def\vp{\varphi}\def\es{\varepsilon}
+\def\sc{\scriptstyle}\def\ssc{\scriptscriptstyle}\def\dis{\displaystyle}
+\def\cl{\centerline}\def\ll{\leftline}\def\rl{\rightline}\def\nl{\newline}
+\def\ol{\overline}\def\ul{\underline}\def\wt{\widetilde}\def\wh{\widehat}
+\def\rar{\rightarrow}\def\Rar{\Rightarrow}\def\lar{\leftarrow}
+\def\Lar{\Leftarrow}\def\Rla{\rightleftarrow}\def\bs{\backslash}
+\def\ra{\rangle}\def\la{\langle}\def\hs{\hspace*}\def\rb{\raisebox}
+\def\ni{\noindent}\def\hi{\hangindent}\def\ha{\hangafter}
+\def\vs{\vspace*}
+\def\hom#1{\mbox{\rm Hom($#1,#1$)}}
+\def\thebeg{\vskip8pt\par\ni}
+\def\theend{\vskip5pt\par}
+\def\chabeg{\pagebreak\par}
+\def\chaend{\vskip20pt\par}
+\def\secbeg{\vskip15pt\par}
+\def\secend{\vskip10pt\par}
+\def\exebeg{\vskip10pt}
+\def\exeend{\vskip6pt}
+\def\undot#1{\mbox{$\mbox{#1}\hs{-1.5ex}_{_{\dis\centerdot}}\,\,$}}
+\def\qed{\hfill\mbox{$\Box$}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\ii{\mbox{\,{\bf i}\,}}
+\def\jj{\mbox{\,{\bf j}\,}}
+\def\AA{{\cal A}}
+\def\BB{{\cal B}}
+\def\DD{{\cal D}}
+\def\EE{{\mbox{\bf 1}}}
+\def\OO{{\mbox{\bf 0}}}
+\def\kk{{\mbox{\bf k}}}
+\def\R{\mathbb{R}}
+\def\F{\mathbb{F}{\ssc\,}}
+%\def\similar{\rb{-4pt}{\mbox{\,\~\,}}}
+\def\similar{\backsim}
+\def\Llra{\Longleftrightarrow}
+\def\Lra{\Longrightarrow}
+\def\Lla{\Longleftarrow}
+\def\mat#1#2{\mbox{$\left(\begin{array}{#1}#2\end{array}\right)$}}
+\def\det#1#2{\mbox{$\left|\begin{array}{#1}#2\end{array}\right|$}}
+\def\eset{\emptyset}
+\parindent=5ex
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\date{}
+\title{Network assignment 4}
+\author{Qinglin Li, 5110309074}
+\begin{document}
+\maketitle
+\section*{P2}
+Sum of 16-bit integers:\\
+
+\begin{tabular}{ccc}
+  & 00000000 & 00000001\\ 
+  & 00000010 & 00000011\\ 
+  & 00000100 & 00000101\\ 
+  & 00000110 & 00000111\\ 
++ & 00001000 & 00001001\\ 
+\hline
+  & 00010100 & 00011001
+\end{tabular} 
+
+Take 1's complement of the sum: $checksum = 11101011~11100110$
+
+\section*{P7}
+\begin{enumerate}[(a)]
+\item
+$y=Np(1-p)^{N-1}$\\
+$\frac{\mathrm{d}y}{\mathrm{d}p}=N(1-p)^{N-1} - Np\cdot(N-1)(1-p)^{N-2}$\\
+Let $\frac{\mathrm{d}y}{\mathrm{d}p}=0$\\
+$N(1-p)^{N-1} - Np\cdot(N-1)(1-p)^{N-2}=0$\\
+$\Longrightarrow p = 1$ or $p=\frac{1}{N}$\\
+Since $p<1$, $p = \frac{1}{N}$
+\item 
+Plug in $p=\frac{1}{N}$\\
+$y=(1-N)^{N-1}=(1-N)^N\cdot (1-N)^{-1}$\\
+$\lim_{N\to \infty} y= e^{-1}\cdot 1 = e^{-1}$
+\end{enumerate}
+
+\section*{P8}
+$y=Np(1-p)^{2N-1}$\\
+$\frac{\mathrm{d}y}{\mathrm{d}p}=N(1-p)^{2N-1} - Np\cdot(2N-1)(1-p)^{2N-2}$\\
+Let $\frac{\mathrm{d}y}{\mathrm{d}p}=0$\\
+$N(1-p)^{2N-1} - Np\cdot(N-1)(1-p)^{2N-2}=0$\\
+$\Longrightarrow p = 1$ or $p=\frac{1}{N}$\\
+Since $p<1$, $p = \frac{1}{N}$ 
+Plug in $p=\frac{1}{N}$\\
+$y=(1-N)^{2N-1}=(1-N)^{2N}\cdot (1-N)^{-1}$\\
+$\lim_{N\to \infty} y= e^{-2}\cdot 1 = e^{-2}$
+
+\section*{P14}
+For a 1Mbps Ethernet: $100\times 512$bit times = $51.2ms$\\
+For a 10Mbps Ethernet: $100\times 512$bit times = $5.12ms$
+
+\section*{P15}
+Last bit of B's jam signal reaches A: $225+273=498$bit time\\
+A start retransmission: $498+96=594$bit time\\
+A's retransmission signal reaches B: $594+225=819$bit time\\
+
+B returns to Step 2: $273+512=785$bit time\\
+
+Since $819-785<96$, the retransmission won't collide and the retransmission of B will delay.
+\end{document}
