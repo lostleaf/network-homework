@@ -12,7 +12,7 @@
 \parskip .09 truein
 \baselineskip 4pt\lineskip 4pt \setcounter{page}{1}
 \def\a{\alpha}\def\b{\beta}\def\d{\mathrm{d}}\def\D{\Delta}\def\fs{\footnotesize}
-\def\g{\gamma}
+\def\g{\gamma}\def\N{\frac{1}{N}}
 \def\G{\Gamma}\def\l{\lambda}\def\L{\Lambda}\def\o{\omiga}\def\p{\psi}
 \def\se{\subseteq}\def\seq{\subseteq}\def\Si{\Sigma}\def\si{\sigma}\def\vp{\varphi}\def\es{\varepsilon}
 \def\sc{\scriptstyle}\def\ssc{\scriptscriptstyle}\def\dis{\displaystyle}
@@ -89,20 +89,20 @@ $\Longrightarrow p = 1$ or $p=\frac{1}{N}$\\
 Since $p<1$, $p = \frac{1}{N}$
 \item 
 Plug in $p=\frac{1}{N}$\\
-$y=(1-N)^{N-1}=(1-N)^N\cdot (1-N)^{-1}$\\
+$y=(1-\N)^{N-1}=(1-\N)^N\cdot (1-\N)^{-1}$\\
 $\lim_{N\to \infty} y= e^{-1}\cdot 1 = e^{-1}$
 \end{enumerate}
 
 \section*{P8}
-$y=Np(1-p)^{2N-1}$\\
-$\frac{\mathrm{d}y}{\mathrm{d}p}=N(1-p)^{2N-1} - Np\cdot(2N-1)(1-p)^{2N-2}$\\
+$y=Np(1-p)^{2(N-1)}$\\
+$\frac{\mathrm{d}y}{\mathrm{d}p}=N(1-p)^{2(N-1)} - Np\cdot2(N-1)(1-p)^{2N-3}$\\
 Let $\frac{\mathrm{d}y}{\mathrm{d}p}=0$\\
-$N(1-p)^{2N-1} - Np\cdot(N-1)(1-p)^{2N-2}=0$\\
-$\Longrightarrow p = 1$ or $p=\frac{1}{N}$\\
-Since $p<1$, $p = \frac{1}{N}$ 
-Plug in $p=\frac{1}{N}$\\
-$y=(1-N)^{2N-1}=(1-N)^{2N}\cdot (1-N)^{-1}$\\
-$\lim_{N\to \infty} y= e^{-2}\cdot 1 = e^{-2}$
+$N(1-p)^{2(N-1)} - Np\cdot2(N-1)(1-p)^{2N-3}=0$\\
+$\Longrightarrow p = 1$ or $p=\frac{1}{2N-1}$\\
+Since $p<1$, $p = \frac{1}{2N-1}$ 
+Plug in $p=\frac{1}{2N-1}$\\
+$y=\frac{N}{2N-1}(1-\frac{1}{2N-1})^{2(N-1)}$\\
+$\lim_{N\to \infty} y= e^{-1}\cdot \frac{1}{2}= \frac{1}{2e}$
 
 \section*{P14}
 For a 1Mbps Ethernet: $100\times 512$bit times = $51.2ms$\\
